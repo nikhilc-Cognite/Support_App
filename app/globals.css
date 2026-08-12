@@ -1,0 +1,328 @@
+@import "tailwindcss";
+
+/* Route Tailwind's `dark:` variant through our data-theme attribute (set
+   by the toggle) instead of the default prefers-color-scheme-only
+   behavior — this is what lets a click override the OS setting. The
+   bootstrap script in the root layout always resolves an explicit
+   data-theme on first paint (from localStorage, falling back to system
+   preference), so this is the authoritative mechanism; the
+   prefers-color-scheme blocks on the tokens below only matter if JS is
+   disabled. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ---------------------------------------------------------------------- *
+ * Cognite Support Portal v2 — "Graphite & Cobalt" Design Tokens
+ *
+ * Visual direction: true-neutral graphite (not navy-tinted) paired with a
+ * single vivid cobalt-violet accent — sharper, cooler, more "precision
+ * tool" than v1's softer indigo. Tighter corner radii throughout give it
+ * a more deliberate, less rounded-soft feel. Manrope (geometric, slightly
+ * more character than a stock grotesk) + IBM Plex Mono for anything
+ * data-shaped, replacing v1's Geist pairing.
+ *
+ * Theming follows the same token-level pattern as v1: colors live only
+ * here, components style themselves through the tokens, dark mode was
+ * designed in from the start rather than retrofitted.
+ * ---------------------------------------------------------------------- */
+
+:root {
+  /* Ink — true graphite-black, not navy. Theme-invariant: the dark end of
+     the palette (hero, footer mark, chat bubbles) stays dark in both
+     themes rather than inverting. */
+  --ink-950: #0b0c10;
+  --ink-900: #131519;
+  --ink-800: #1d2027;
+  --ink-700: #2b2f38;
+
+  /* Neutral — true cool gray (no blue bias this time). The scale that
+     inverts between themes. */
+  --neutral-0: #ffffff;
+  --neutral-50: #f7f7f8;
+  --neutral-100: #eeeef1;
+  --neutral-200: #dfe0e4;
+  --neutral-300: #c7c9cf;
+  --neutral-400: #9a9da6;
+  --neutral-500: #71747e;
+  --neutral-600: #50525c;
+  --neutral-700: #393b43;
+  --neutral-800: #25272d;
+  --neutral-900: #17181c;
+
+  /* Accent — cobalt-violet, the single confident accent color */
+  --accent-50: #eef0fe;
+  --accent-100: #dfe2fd;
+  --accent-200: #bfc4fb;
+  --accent-300: #9aa0f7;
+  --accent-400: #7d7ff2;
+  --accent-500: #6156e0;
+  --accent-600: #4f3fd0;
+  --accent-700: #4030ab;
+  --accent-800: #332686;
+  --accent-900: #281f66;
+
+  /* Semantic status colors — desaturated, enterprise, not candy. The 300
+     and 900 stops give dark-mode badges/alerts a light-text on dark-tint
+     pair and are constant across themes by design. */
+  --success-50: #e9faf1;
+  --success-300: #7ee8b8;
+  --success-500: #14875a;
+  --success-700: #0d6144;
+  --success-900: #0b3d2c;
+
+  --warning-50: #fdf5e7;
+  --warning-300: #f0c674;
+  --warning-500: #9c6a12;
+  --warning-700: #714d0c;
+  --warning-900: #402c08;
+
+  --danger-50: #fdecec;
+  --danger-300: #ff9891;
+  --danger-500: #c22b2b;
+  --danger-700: #932020;
+  --danger-900: #3d1414;
+
+  --info-50: var(--accent-50);
+  --info-300: var(--accent-300);
+  --info-500: var(--accent-500);
+  --info-700: var(--accent-700);
+  --info-900: var(--accent-900);
+
+  --background: var(--neutral-0);
+  --foreground: var(--neutral-900);
+
+  --shadow-card: 0 1px 2px 0 rgb(11 12 16 / 0.05), 0 1px 1px 0 rgb(11 12 16 / 0.03);
+  --shadow-elevated: 0 4px 16px -4px rgb(11 12 16 / 0.12), 0 2px 6px -2px rgb(11 12 16 / 0.06);
+  --shadow-popover: 0 12px 32px -8px rgb(11 12 16 / 0.20), 0 4px 12px -4px rgb(11 12 16 / 0.09);
+}
+
+/* System preference — applies automatically until the visitor picks
+   explicitly via the toggle. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --neutral-0: #0b0c10;
+    --neutral-50: #101216;
+    --neutral-100: #16181d;
+    --neutral-200: #24262d;
+    --neutral-300: #33363f;
+    --neutral-400: #6b6f7a;
+    --neutral-500: #888c97;
+    --neutral-600: #a4a8b1;
+    --neutral-700: #c2c5cc;
+    --neutral-800: #dfe0e4;
+    --neutral-900: #f5f5f6;
+
+    --shadow-card: 0 1px 2px 0 rgb(0 0 0 / 0.34), 0 1px 1px 0 rgb(0 0 0 / 0.24);
+    --shadow-elevated: 0 4px 16px -4px rgb(0 0 0 / 0.48), 0 2px 6px -2px rgb(0 0 0 / 0.3);
+    --shadow-popover: 0 12px 32px -8px rgb(0 0 0 / 0.58), 0 4px 12px -4px rgb(0 0 0 / 0.4);
+  }
+}
+
+/* Explicit choice from the toggle — wins over the OS setting either way. */
+:root[data-theme="dark"] {
+  --neutral-0: #0b0c10;
+  --neutral-50: #101216;
+  --neutral-100: #16181d;
+  --neutral-200: #24262d;
+  --neutral-300: #33363f;
+  --neutral-400: #6b6f7a;
+  --neutral-500: #888c97;
+  --neutral-600: #a4a8b1;
+  --neutral-700: #c2c5cc;
+  --neutral-800: #dfe0e4;
+  --neutral-900: #f5f5f6;
+
+  --shadow-card: 0 1px 2px 0 rgb(0 0 0 / 0.34), 0 1px 1px 0 rgb(0 0 0 / 0.24);
+  --shadow-elevated: 0 4px 16px -4px rgb(0 0 0 / 0.48), 0 2px 6px -2px rgb(0 0 0 / 0.3);
+  --shadow-popover: 0 12px 32px -8px rgb(0 0 0 / 0.58), 0 4px 12px -4px rgb(0 0 0 / 0.4);
+}
+
+:root[data-theme="light"] {
+  --neutral-0: #ffffff;
+  --neutral-50: #f7f7f8;
+  --neutral-100: #eeeef1;
+  --neutral-200: #dfe0e4;
+  --neutral-300: #c7c9cf;
+  --neutral-400: #9a9da6;
+  --neutral-500: #71747e;
+  --neutral-600: #50525c;
+  --neutral-700: #393b43;
+  --neutral-800: #25272d;
+  --neutral-900: #17181c;
+
+  --shadow-card: 0 1px 2px 0 rgb(11 12 16 / 0.05), 0 1px 1px 0 rgb(11 12 16 / 0.03);
+  --shadow-elevated: 0 4px 16px -4px rgb(11 12 16 / 0.12), 0 2px 6px -2px rgb(11 12 16 / 0.06);
+  --shadow-popover: 0 12px 32px -8px rgb(11 12 16 / 0.20), 0 4px 12px -4px rgb(11 12 16 / 0.09);
+}
+
+@theme inline {
+  --color-ink-950: var(--ink-950);
+  --color-ink-900: var(--ink-900);
+  --color-ink-800: var(--ink-800);
+  --color-ink-700: var(--ink-700);
+
+  --color-neutral-0: var(--neutral-0);
+  --color-neutral-50: var(--neutral-50);
+  --color-neutral-100: var(--neutral-100);
+  --color-neutral-200: var(--neutral-200);
+  --color-neutral-300: var(--neutral-300);
+  --color-neutral-400: var(--neutral-400);
+  --color-neutral-500: var(--neutral-500);
+  --color-neutral-600: var(--neutral-600);
+  --color-neutral-700: var(--neutral-700);
+  --color-neutral-800: var(--neutral-800);
+  --color-neutral-900: var(--neutral-900);
+
+  --color-accent-50: var(--accent-50);
+  --color-accent-100: var(--accent-100);
+  --color-accent-200: var(--accent-200);
+  --color-accent-300: var(--accent-300);
+  --color-accent-400: var(--accent-400);
+  --color-accent-500: var(--accent-500);
+  --color-accent-600: var(--accent-600);
+  --color-accent-700: var(--accent-700);
+  --color-accent-800: var(--accent-800);
+  --color-accent-900: var(--accent-900);
+
+  --color-success-50: var(--success-50);
+  --color-success-300: var(--success-300);
+  --color-success-500: var(--success-500);
+  --color-success-700: var(--success-700);
+  --color-success-900: var(--success-900);
+
+  --color-warning-50: var(--warning-50);
+  --color-warning-300: var(--warning-300);
+  --color-warning-500: var(--warning-500);
+  --color-warning-700: var(--warning-700);
+  --color-warning-900: var(--warning-900);
+
+  --color-danger-50: var(--danger-50);
+  --color-danger-300: var(--danger-300);
+  --color-danger-500: var(--danger-500);
+  --color-danger-700: var(--danger-700);
+  --color-danger-900: var(--danger-900);
+
+  --color-info-50: var(--info-50);
+  --color-info-300: var(--info-300);
+  --color-info-500: var(--info-500);
+  --color-info-700: var(--info-700);
+  --color-info-900: var(--info-900);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-sans: var(--font-manrope);
+  --font-mono: var(--font-plex-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+/* Focus ring — consistent, visible, WCAG-compliant */
+:focus-visible {
+  outline: 2px solid var(--accent-500);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--accent-100);
+  color: var(--accent-900);
+}
+
+/* Scrollbar — subtle, not the browser default chrome */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--neutral-300) transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body {
+    transition: none;
+  }
+}
+
+.prose-article {
+  max-width: 72ch;
+}
+.prose-article h2 {
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: var(--neutral-900);
+  margin-top: 2.25rem;
+  margin-bottom: 0.75rem;
+  scroll-margin-top: 6rem;
+}
+.prose-article h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--neutral-900);
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+  scroll-margin-top: 6rem;
+}
+.prose-article p {
+  color: var(--neutral-700);
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+.prose-article ul,
+.prose-article ol {
+  color: var(--neutral-700);
+  line-height: 1.75;
+  margin-bottom: 1rem;
+  padding-left: 1.25rem;
+}
+.prose-article li {
+  margin-bottom: 0.375rem;
+}
+.prose-article ul {
+  list-style: disc;
+}
+.prose-article ol {
+  list-style: decimal;
+}
+.prose-article code {
+  background: var(--neutral-100);
+  color: var(--accent-800);
+  padding: 0.125rem 0.375rem;
+  border-radius: 4px;
+  font-size: 0.875em;
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+:root[data-theme="dark"] .prose-article code {
+  color: var(--accent-300);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .prose-article code {
+    color: var(--accent-300);
+  }
+}
+.prose-article pre {
+  background: var(--ink-950);
+  color: var(--neutral-100);
+  padding: 1rem 1.125rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin-bottom: 1.25rem;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+.prose-article pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+.prose-article strong {
+  color: var(--neutral-900);
+  font-weight: 600;
+}
+.prose-article a {
+  color: var(--accent-600);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
