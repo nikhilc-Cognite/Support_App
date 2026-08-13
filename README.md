@@ -1,4 +1,4 @@
-# Cognite Support Portal v2 — "Graphite & Cobalt"
+# Cognite Support Portal v2 — "Graphite & Teal"
 
 The same customer support portal as v1 — full feature parity, same information architecture — rebuilt with a new visual theme and one new capability: **Resolution Intelligence**, a flywheel that turns every resolved ticket into a one-click Knowledge Base article, with a live "resolved N times" trust counter that Ask AI and search cite.
 
@@ -9,7 +9,7 @@ v1 (untouched, still running independently) lives at `../Sample Support Page /`.
 | | v1 | v2 |
 |---|---|---|
 | Ink | Navy-tinted near-black | True graphite-black |
-| Accent | Blue (`#2b3fd6`) | Cobalt-violet (`#6156e0`) |
+| Accent | Blue (`#2b3fd6`) | Cognite teal (`#1a9b86`) |
 | Type | Geist Sans / Geist Mono | Manrope / IBM Plex Mono |
 | Corner radii | `rounded-xl` / `rounded-2xl` | One notch tighter throughout |
 | Dark mode | Added after launch | Designed in from day one |
