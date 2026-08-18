@@ -24,7 +24,24 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) (or whatever port is free — v1 typically holds 3000, so this often lands on 3001). No environment variables or backend needed; everything is mocked in `lib/mock-data/`.
+Open [http://localhost:3000](http://localhost:3000) (or whatever port is free — v1 typically holds 3000, so this often lands on 3001).
+
+### Ask AI (kapa.ai Chat API)
+
+Ask AI calls Cognite's [kapa.ai Chat API](https://docs.kapa.ai/integrations/chat-api) through a **server-side** proxy (`/api/ask-ai`) so the API key never ships to the browser.
+
+1. In the Cognite kapa dashboard, create an API key and a **Custom (API)** integration
+2. Copy `env.kapa.example` into `.env.local` and set:
+
+```bash
+KAPA_API_KEY=...
+KAPA_PROJECT_ID=ebf1a74a-2447-444b-9a38-80272b49c875
+```
+
+`KAPA_INTEGRATION_ID` is optional.
+3. Restart `npm run dev`
+
+Without these, the portal still runs; Ask AI shows a setup hint.
 
 ## Try Resolution Intelligence
 

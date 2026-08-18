@@ -7,7 +7,7 @@ export default async function AskAIPage({ searchParams }: PageProps<"/ask-ai">) 
   const q = typeof params.q === "string" ? params.q : undefined;
 
   return (
-    <div className="mx-auto flex h-[calc(100vh-64px)] max-w-3xl flex-col px-4 sm:px-6 lg:px-8">
+    <div className="mx-auto flex min-h-[calc(100vh-8rem)] max-w-3xl flex-col px-4 sm:px-6 lg:px-8">
       <AskAIChat initialQuery={q} />
     </div>
   );

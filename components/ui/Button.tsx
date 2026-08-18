@@ -46,8 +46,15 @@ export function Button({
   const classes = cn(base, variants[variant], sizes[size], className);
 
   if (href) {
+    const { onClick, type: _type, disabled, ...rest } = props;
     return (
-      <Link href={href} className={classes}>
+      <Link
+        href={href}
+        className={cn(classes, disabled && "pointer-events-none opacity-50")}
+        onClick={onClick as ComponentProps<typeof Link>["onClick"]}
+        aria-disabled={disabled || undefined}
+        {...(rest as Omit<ComponentProps<typeof Link>, "href" | "className" | "onClick" | "children">)}
+      >
         {icon}
         {children}
         {iconRight}

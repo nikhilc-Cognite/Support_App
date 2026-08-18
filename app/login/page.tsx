@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Label, Input } from "@/components/ui/Field";
 import { Button } from "@/components/ui/Button";
+import { CogniteLogo } from "@/components/brand/CogniteLogo";
 import { ShieldCheck } from "lucide-react";
 
 export const metadata = { title: "Sign in — Cognite Support" };
@@ -9,7 +10,9 @@ export default function LoginPage() {
   return (
     <div className="mx-auto flex min-h-[calc(100vh-64px-320px)] max-w-md flex-col justify-center px-4 py-16 sm:px-6">
       <div className="text-center">
-        <span className="mx-auto flex h-10 w-10 items-center justify-center rounded-lg bg-ink-950 text-sm font-bold text-white">X</span>
+        <div className="flex justify-center">
+          <CogniteLogo heightClassName="h-9" />
+        </div>
         <h1 className="mt-4 text-xl font-semibold text-neutral-900">Sign in to Cognite Support</h1>
         <p className="mt-1.5 text-sm text-neutral-500">Track tickets, get personalized answers, and reach your support team.</p>
       </div>

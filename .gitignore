@@ -33,6 +33,9 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# local kapa.ai secrets (API key) — never commit
+kapa.local.json
+
 # vercel
 .vercel
 

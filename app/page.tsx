@@ -14,15 +14,17 @@ import {
 import { GlobalSearch } from "@/components/layout/GlobalSearch";
 import { StatusSummaryCard } from "@/components/status/StatusSummaryCard";
 import { ArticleCard } from "@/components/knowledge/ArticleCard";
+import { AskAITrigger } from "@/components/ask-ai/AskAITrigger";
 import { Card, CardLink } from "@/components/ui/Card";
-import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { trendingArticles, recentlyUpdatedArticles } from "@/lib/mock-data/knowledge";
 import { learnItems } from "@/lib/mock-data/learn";
 import { formatDate } from "@/lib/utils";
 
+const quickActionClass =
+  "group flex flex-col gap-2.5 rounded-xl border border-white/20 bg-black/35 p-4 backdrop-blur-sm transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-accent-400/50 hover:bg-black/45";
+
 const quickActions = [
-  { label: "Ask AI", description: "Conversational answers, cited sources", href: "/ask-ai", icon: Sparkles },
   { label: "Create a Ticket", description: "Guided, gets to a human fast", href: "/tickets/new", icon: LifeBuoy },
   { label: "My Tickets", description: "Track everything you've submitted", href: "/tickets", icon: Ticket },
   { label: "Browse Knowledge", description: "Guides, FAQs, troubleshooting", href: "/knowledge", icon: BookOpen },
@@ -39,50 +41,47 @@ export default function HomePage() {
 
   return (
     <div>
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-ink-950">
-        {/* Fine dot-grid texture, fading toward the edges */}
+      {/* Hero — full-bleed Cognite visual */}
+      <section className="relative min-h-[min(72vh,640px)] overflow-hidden bg-ink-950">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/hero-center.png?v=5"
+          alt=""
+          aria-hidden
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
+        />
+        {/* Light scrim — keeps type readable without hiding the brand visual */}
         <div
-          className="pointer-events-none absolute inset-0 opacity-40"
+          className="pointer-events-none absolute inset-0"
           style={{
-            backgroundImage: "radial-gradient(circle, rgb(255 255 255 / 0.14) 1px, transparent 1px)",
-            backgroundSize: "28px 28px",
-            maskImage: "radial-gradient(ellipse 60% 55% at 50% 35%, black 0%, transparent 75%)",
-            WebkitMaskImage: "radial-gradient(ellipse 60% 55% at 50% 35%, black 0%, transparent 75%)",
+            background:
+              "linear-gradient(180deg, rgb(11 12 16 / 0.25) 0%, rgb(11 12 16 / 0.15) 45%, rgb(11 12 16 / 0.45) 100%)",
           }}
         />
-        {/* Soft accent glow behind the headline */}
-        <div
-          className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[720px] -translate-x-1/2 -translate-y-1/3 rounded-full opacity-30 blur-[110px]"
-          style={{ background: "radial-gradient(circle, #6156e0 0%, transparent 70%)" }}
-        />
 
-        <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+        <div className="relative mx-auto flex min-h-[min(72vh,640px)] max-w-7xl flex-col justify-center px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <Badge tone="accent" className="bg-accent-500/15 text-accent-300">
-              Cognite Support
-            </Badge>
-            <h1 className="mt-5 text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+            <h1 className="text-4xl font-semibold tracking-tight text-white drop-shadow-[0_2px_12px_rgb(0_0_0_/_0.45)] sm:text-5xl">
               How can we help?
             </h1>
-            <p className="mt-4 text-[15px] text-neutral-400">
-              Search the knowledge base, ask our AI assistant, or reach a person — whichever gets you to an answer fastest.
-            </p>
           </div>
-          <div className="mx-auto mt-9 flex justify-center">
+          <div className="mx-auto mt-9 flex w-full justify-center">
             <GlobalSearch variant="hero" />
           </div>
-          <div className="mx-auto mt-10 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
+          <div className="mx-auto mt-10 grid w-full max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
+            <AskAITrigger mode="float" className={quickActionClass}>
+              <Sparkles className="h-5 w-5 text-accent-400" />
+              <div>
+                <p className="text-sm font-semibold text-white">Ask AI</p>
+                <p className="mt-0.5 text-xs text-neutral-300">Conversational answers, cited sources</p>
+              </div>
+            </AskAITrigger>
             {quickActions.map((action) => (
-              <Link
-                key={action.href}
-                href={action.href}
-                className="group flex flex-col gap-2.5 rounded-xl border border-white/10 bg-white/[0.04] p-4 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-accent-400/40 hover:bg-white/[0.07]"
-              >
+              <Link key={action.href} href={action.href} className={quickActionClass}>
                 <action.icon className="h-5 w-5 text-accent-400" />
                 <div>
                   <p className="text-sm font-semibold text-white">{action.label}</p>
-                  <p className="mt-0.5 text-xs text-neutral-400">{action.description}</p>
+                  <p className="mt-0.5 text-xs text-neutral-300">{action.description}</p>
                 </div>
               </Link>
             ))}

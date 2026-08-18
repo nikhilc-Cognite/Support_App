@@ -41,9 +41,13 @@ export function GlobalSearch({ variant = "nav" }: { variant?: "nav" | "hero" }) 
     setOpen(false);
   }
 
+  /** Enter / Ask AI row → full-page Ask AI (same as header), with the query submitted */
   function goToAskAI() {
-    router.push(`/ask-ai?q=${encodeURIComponent(query.trim())}`);
+    const q = query.trim();
+    if (!q) return;
     setOpen(false);
+    setQuery("");
+    router.push(`/ask-ai?q=${encodeURIComponent(q)}`);
   }
 
   const grouped = results.reduce<Record<string, SearchResult[]>>((acc, r) => {
@@ -68,7 +72,12 @@ export function GlobalSearch({ variant = "nav" }: { variant?: "nav" | "hero" }) 
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => setOpen(true)}
-          onKeyDown={(e) => e.key === "Enter" && goToSearch()}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              goToAskAI();
+            }
+          }}
           placeholder={isHero ? "Search or ask a question — “why is my export failing?”" : "Search or ask a question…"}
           className={cn("w-full bg-transparent text-neutral-900 placeholder:text-neutral-400 focus:outline-none", isHero ? "text-base" : "text-sm")}
         />
@@ -82,6 +91,7 @@ export function GlobalSearch({ variant = "nav" }: { variant?: "nav" | "hero" }) 
       {open && query.length > 1 && (
         <div className="absolute inset-x-0 z-50 mt-2 overflow-hidden rounded-lg border border-neutral-200 bg-neutral-0 shadow-[var(--shadow-popover)]">
           <button
+            type="button"
             onClick={goToAskAI}
             className="flex w-full items-center gap-2.5 border-b border-neutral-100 px-4 py-3 text-left hover:bg-accent-50 dark:hover:bg-accent-900/30"
           >
@@ -89,11 +99,12 @@ export function GlobalSearch({ variant = "nav" }: { variant?: "nav" | "hero" }) 
             <span className="text-sm text-neutral-800">
               Ask AI: <span className="font-medium text-accent-700 dark:text-accent-300">&ldquo;{query}&rdquo;</span>
             </span>
+            <CornerDownLeft className="ml-auto h-3.5 w-3.5 shrink-0 text-neutral-400" />
           </button>
 
           {results.length === 0 ? (
             <div className="px-4 py-6 text-center text-sm text-neutral-500">
-              No matches yet — press Enter to search everything, or ask AI above.
+              No matches yet — press Enter to Ask AI, or browse results below.
             </div>
           ) : (
             <div className="max-h-96 overflow-y-auto py-1">
@@ -118,14 +129,16 @@ export function GlobalSearch({ variant = "nav" }: { variant?: "nav" | "hero" }) 
           )}
 
           <button
+            type="button"
             onClick={goToSearch}
             className="flex w-full items-center justify-between border-t border-neutral-100 px-4 py-2.5 text-left text-xs font-medium text-neutral-500 hover:bg-neutral-50"
           >
-            View all results for &ldquo;{query}&rdquo;
-            <CornerDownLeft className="h-3.5 w-3.5" />
+            View all search results for &ldquo;{query}&rdquo;
+            <Search className="h-3.5 w-3.5" />
           </button>
         </div>
       )}
     </div>
   );
 }
+

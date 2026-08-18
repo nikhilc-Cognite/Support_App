@@ -10,6 +10,7 @@ import { AccountMenu } from "@/components/layout/AccountMenu";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { IncidentBanner } from "@/components/layout/IncidentBanner";
 import { Button } from "@/components/ui/Button";
+import { CogniteLogo } from "@/components/brand/CogniteLogo";
 import { cn } from "@/lib/utils";
 
 const primaryNav = [
@@ -28,13 +29,8 @@ export function GlobalNav() {
       <IncidentBanner />
       <header className="border-b border-neutral-200/70 bg-neutral-0/80 shadow-[0_1px_0_0_rgb(11_12_16_/_0.02)] backdrop-blur-md">
         <div className="mx-auto flex h-[68px] max-w-7xl items-center gap-7 px-4 sm:px-6 lg:px-8">
-          <Link href="/" className="flex shrink-0 items-center gap-2.5">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-ink-950 text-sm font-bold text-white">
-              C
-            </span>
-            <span className="text-[15px] font-semibold tracking-tight text-neutral-900">
-              Cognite <span className="font-normal text-neutral-400">Support</span>
-            </span>
+          <Link href="/" className="flex shrink-0 items-center">
+            <CogniteLogo heightClassName="h-7" />
           </Link>
 
           <nav className="hidden items-center gap-1 lg:flex">
@@ -123,7 +119,7 @@ export function GlobalNav() {
               </div>
               <div className="my-1.5 h-px bg-neutral-100" />
               <div className="flex gap-2 px-1 pt-1">
-                <Button href="/ask-ai" variant="secondary" size="sm" className="flex-1">
+                <Button href="/ask-ai" variant="secondary" size="sm" className="flex-1" onClick={() => setMobileOpen(false)}>
                   Ask AI
                 </Button>
                 <Button href="/tickets/new" size="sm" className="flex-1">

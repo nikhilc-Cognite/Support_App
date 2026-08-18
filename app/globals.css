@@ -326,3 +326,42 @@ body {
   text-decoration: underline;
   text-underline-offset: 2px;
 }
+
+/* Compact markdown inside Ask AI answers */
+.prose-ai {
+  max-width: none;
+  font-size: 0.875rem;
+}
+.prose-ai h2 {
+  font-size: 1.05rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+.prose-ai h3 {
+  font-size: 0.95rem;
+  margin-top: 1rem;
+  margin-bottom: 0.4rem;
+}
+.prose-ai p,
+.prose-ai li {
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+.prose-ai p {
+  margin-bottom: 0.75rem;
+}
+.prose-ai pre {
+  font-size: 0.75rem;
+  margin-bottom: 0.9rem;
+}
+.prose-ai h2:first-child,
+.prose-ai h3:first-child,
+.prose-ai p:first-child {
+  margin-top: 0;
+}
+
+.font-display {
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.02em;
+}
+

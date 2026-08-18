@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CogniteLogo } from "@/components/brand/CogniteLogo";
 
 const columns = [
   {
@@ -35,9 +36,8 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 gap-10 sm:grid-cols-4">
           <div className="col-span-2 sm:col-span-1">
-            <div className="flex items-center gap-2.5">
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-ink-950 text-sm font-bold text-white">C</span>
-              <span className="text-[15px] font-semibold text-neutral-900">Cognite Support</span>
+            <div className="flex items-center">
+              <CogniteLogo heightClassName="h-7" />
             </div>
             <p className="mt-3 text-sm text-neutral-500">
               Answers first, humans always reachable.
