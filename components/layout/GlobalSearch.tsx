@@ -27,10 +27,10 @@ export function GlobalSearch({ variant = "nav" }: { variant?: "nav" | "hero" }) 
       }
       if (e.key === "Escape") setOpen(false);
     }
-    document.addEventListener("mousedown", onClick);
+    document.addEventListener("click", onClick);
     document.addEventListener("keydown", onKey);
     return () => {
-      document.removeEventListener("mousedown", onClick);
+      document.removeEventListener("click", onClick);
       document.removeEventListener("keydown", onKey);
     };
   }, []);

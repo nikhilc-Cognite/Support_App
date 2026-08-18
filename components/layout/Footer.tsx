@@ -1,13 +1,13 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 import { CogniteLogo } from "@/components/brand/CogniteLogo";
 
 const columns = [
   {
     title: "Self-Service",
     links: [
-      { label: "Knowledge Base", href: "/knowledge" },
-      { label: "Documentation", href: "/docs" },
-      { label: "Learn", href: "/learn" },
+      { label: "Documentation", href: "https://docs.cognite.com/", external: true },
+      { label: "Learn", href: "https://hub.cognite.com/p/academy", external: true },
       { label: "Ask AI", href: "/ask-ai" },
     ],
   },
@@ -16,19 +16,33 @@ const columns = [
     links: [
       { label: "Create a Ticket", href: "/tickets/new" },
       { label: "My Tickets", href: "/tickets" },
-      { label: "System Status", href: "/status" },
+      { label: "System Status", href: "https://status.cognite.com/", external: true },
       { label: "Support Hub", href: "/hub" },
+      { label: "Community Forum", href: "https://hub.cognite.com/product-user-community-428", external: true },
     ],
   },
   {
     title: "Account",
     links: [
       { label: "Profile", href: "/account/profile" },
-      { label: "Organization", href: "/account/organization" },
-      { label: "Notifications", href: "/notifications" },
     ],
   },
 ];
+
+function FooterLink({ href, external, children }: { href: string; external?: boolean; children: ReactNode }) {
+  if (external) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" className="text-sm text-neutral-600 hover:text-accent-600">
+        {children}
+      </a>
+    );
+  }
+  return (
+    <Link href={href} className="text-sm text-neutral-600 hover:text-accent-600">
+      {children}
+    </Link>
+  );
+}
 
 export function Footer() {
   return (
@@ -39,9 +53,6 @@ export function Footer() {
             <div className="flex items-center">
               <CogniteLogo heightClassName="h-7" />
             </div>
-            <p className="mt-3 text-sm text-neutral-500">
-              Answers first, humans always reachable.
-            </p>
           </div>
           {columns.map((col) => (
             <div key={col.title}>
@@ -49,9 +60,9 @@ export function Footer() {
               <ul className="mt-3 space-y-2.5">
                 {col.links.map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href} className="text-sm text-neutral-600 hover:text-accent-600">
+                    <FooterLink href={link.href} external={link.external}>
                       {link.label}
-                    </Link>
+                    </FooterLink>
                   </li>
                 ))}
               </ul>

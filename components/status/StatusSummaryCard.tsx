@@ -1,7 +1,8 @@
-import Link from "next/link";
 import { CheckCircle2, AlertTriangle, ArrowRight } from "lucide-react";
 import { overallStatus, activeIncidents } from "@/lib/mock-data/status";
 import { cn } from "@/lib/utils";
+
+const STATUS_URL = "https://status.cognite.com/";
 
 export function StatusSummaryCard() {
   const status = overallStatus();
@@ -9,8 +10,10 @@ export function StatusSummaryCard() {
   const isOperational = status === "operational" && active.length === 0;
 
   return (
-    <Link
-      href="/status"
+    <a
+      href={STATUS_URL}
+      target="_blank"
+      rel="noopener noreferrer"
       className={cn(
         "flex items-center justify-between gap-4 rounded-lg border p-4 transition-colors",
         isOperational
@@ -34,6 +37,6 @@ export function StatusSummaryCard() {
         </div>
       </div>
       <ArrowRight className="h-4 w-4 shrink-0 text-neutral-400" />
-    </Link>
+    </a>
   );
 }

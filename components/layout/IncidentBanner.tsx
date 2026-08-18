@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { AlertTriangle } from "lucide-react";
 import { activeIncidents } from "@/lib/mock-data/status";
 
@@ -15,14 +14,16 @@ export function IncidentBanner() {
   const incident = notable[0];
 
   return (
-    <Link
-      href={`/status/incidents/${incident.id}`}
+    <a
+      href="https://status.cognite.com/"
+      target="_blank"
+      rel="noopener noreferrer"
       className="flex items-center justify-center gap-2 bg-danger-500 px-4 py-2 text-center text-sm font-medium text-white hover:bg-danger-700"
     >
       <AlertTriangle className="h-4 w-4 shrink-0" />
       <span className="truncate">
         {incident.title} — affecting {incident.affectedProducts.join(", ")}. View status →
       </span>
-    </Link>
+    </a>
   );
 }
