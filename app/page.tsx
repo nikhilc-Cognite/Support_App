@@ -5,7 +5,6 @@ import {
   Ticket,
   BookOpen,
   ArrowRight,
-  ShieldAlert,
   MessagesSquare,
   ExternalLink,
   Workflow,
@@ -17,10 +16,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { GlobalSearch } from "@/components/layout/GlobalSearch";
-import { StatusSummaryCard } from "@/components/status/StatusSummaryCard";
 import { AskAITrigger } from "@/components/ask-ai/AskAITrigger";
-import { Card } from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
 
 const quickActionClass =
   "group flex flex-col gap-2.5 rounded-xl border border-white/20 bg-black/35 p-4 backdrop-blur-sm transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-accent-400/50 hover:bg-black/45";
@@ -89,10 +85,10 @@ export default function HomePage() {
       <section className="relative min-h-[min(72vh,640px)] overflow-hidden bg-ink-950">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/hero-center.png?v=5"
+          src="/hero-center.png?v=11"
           alt=""
           aria-hidden
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
+          className="pointer-events-none absolute inset-0 h-full w-full object-contain object-right"
         />
         <div
           className="pointer-events-none absolute inset-0"
@@ -143,23 +139,6 @@ export default function HomePage() {
       </section>
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Status + emergency guidance */}
-        <section className="grid grid-cols-1 gap-4 py-8 lg:grid-cols-2">
-          <StatusSummaryCard />
-          <Card className="flex items-center justify-between gap-4 border-neutral-200 bg-neutral-0">
-            <div className="flex items-center gap-3">
-              <ShieldAlert className="h-5 w-5 shrink-0 text-danger-500" />
-              <div>
-                <p className="text-sm font-semibold text-neutral-900">Production down or a critical business impact?</p>
-                <p className="mt-0.5 text-xs text-neutral-500">Mark severity as Critical in the ticket form to route directly to on-call.</p>
-              </div>
-            </div>
-            <Button href="/tickets/new" variant="secondary" size="sm" className="shrink-0">
-              Report now
-            </Button>
-          </Card>
-        </section>
-
         {/* Docs sections — large clickable tiles matching docs.cognite.com */}
         <section className="py-8">
           <div className="flex items-end justify-between gap-4">
